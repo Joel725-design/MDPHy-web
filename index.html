@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Practical MDPhy Tech — Medical Physics & Intelligent Solutions
+    </title>
+    <meta
+      name="description"
+      content="Practical MDPhy Tech develops digital tools, educational resources, and intelligent technology for medical physics, radiation QA, dosimetry, and AI research."
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1f2e'/%3E%3Cpath d='M8 20 L16 8 L24 20' stroke='%2330c7d3' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%2330c7d3'/%3E%3C/svg%3E"
+    />
+    <!-- Font Awesome (free icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* ---------- CSS Variables & Reset ---------- */
+      :root {
+        --navy: #0a1f2e;
+        --navy-light: #0f2a3a;
+        --teal: #30c7d3;
+        --teal-dark: #1fa5b0;
+        --white: #ffffff;
+        --off-white: #f5f9fc;
+        --gray-100: #eef2f6;
+        --gray-200: #d9e2ec;
+        --gray-600: #5a6b7b;
+        --gray-800: #1e2e3b;
+        --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+        --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+        --radius: 16px;
+        --radius-sm: 10px;
+        --font-sans:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        --font-mono: "JetBrains Mono", "Fira Code", monospace;
+        --transition: all 0.25s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background: var(--white);
+        color: var(--gray-800);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--navy);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ---------- Typography ---------- */
+      .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+      }
+
+      .section-subtitle {
+        font-size: 1.1rem;
+        color: var(--gray-600);
+        max-width: 680px;
+        margin-bottom: 48px;
+      }
+
+      .text-teal {
+        color: var(--teal);
+      }
+
+      /* ---------- Buttons ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 28px;
+        border-radius: 40px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: var(--transition);
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+      }
+
+      .btn-primary {
+        background: var(--teal);
+        color: var(--navy);
+        font-weight: 600;
+      }
+
+      .btn-primary:hover {
+        background: var(--teal-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(48, 199, 211, 0.35);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--white);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline-dark {
+        background: transparent;
+        color: var(--navy);
+        border: 1.5px solid var(--gray-200);
+      }
+
+      .btn-outline-dark:hover {
+        border-color: var(--teal);
+        color: var(--teal);
+        transform: translateY(-2px);
+      }
+
+      .btn-sm {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+      }
+
+      /* ---------- Header / Nav ---------- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(10, 31, 46, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--white);
+        letter-spacing: -0.01em;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--teal), #1a7a8a);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: var(--navy);
+        font-weight: 800;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .logo-icon::after {
+        content: "⚛";
+        font-size: 1.3rem;
+      }
+
+      .logo span {
+        color: var(--teal);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.9rem;
+        font-weight: 500;
+        position: relative;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--teal);
+      }
+
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--teal);
+        border-radius: 2px;
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 8px;
+      }
+
+      /* ---------- Mobile Menu ---------- */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: var(--navy);
+        padding: 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 999;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .mobile-menu.open {
+        display: flex;
+      }
+
+      .mobile-menu a {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .mobile-menu a:hover {
+        color: var(--teal);
+        padding-left: 8px;
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: var(--white);
+        padding: 80px 0 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -30%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(48, 199, 211, 0.12) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -20%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(48, 199, 211, 0.08) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 3.2rem;
+        color: var(--white);
+        margin-bottom: 20px;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+
+      .hero h1 .highlight {
+        color: var(--teal);
+        position: relative;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-bottom: 32px;
+        max-width: 540px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-illustration {
+        width: 100%;
+        max-width: 480px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 24px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        position: relative;
+      }
+
+      .hero-illustration svg {
+        width: 100%;
+        height: auto;
+      }
+
+      /* ---------- Intro / Focus ---------- */
+      .intro {
+        padding: 80px 0;
+        background: var(--off-white);
+      }
+
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .intro h2 {
+        font-size: 2rem;
+        margin-bottom: 16px;
+      }
+
+      .intro p {
+        color: var(--gray-600);
+        margin-bottom: 16px;
+      }
+
+      .focus-areas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .focus-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        background: var(--white);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--navy);
+      }
+
+      .focus-item i {
+        color: var(--teal);
+        font-size: 1.1rem;
+        width: 20px;
+      }
+
+      /* ---------- Featured Projects ---------- */
+      .featured-projects {
+        padding: 80px 0;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 28px;
+      }
+
+      .project-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--gray-100);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--teal);
+      }
+
+      .project-thumb {
+        height: 160px;
+        background: linear-gradient(135deg, var(--navy-light), #0b2b3b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--teal);
+        font-size: 2.5rem;
+      }
+
+      .project-thumb i {
+        opacity: 0.8;
+      }
+
+      .project-body {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-body h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .project-body p {
+        font-size: 0.9rem;
+        color: var(--gray-600);
+        margin-bottom: 16px;
+        flex: 1;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .tag {
+        background: var(--gray-100);
+        color: var(--navy);
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      .tag-teal {
+        background: rgba(48, 199, 211, 0.12);
+        color: var(--teal-dark);
+      }
+
+      .project-link {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--teal-dark);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: auto;
+      }
+
+      .project-link:hover {
+        gap: 10px;
+      }
+
+      /* ---------- Learning Preview ---------- */
+      .learning-preview {
+        padding: 80px 0;
+        background: var(--off-white);
+      }
+
+      .video-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .video-preview-card {
+        background: var(--white);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--gray-100);
+        transition: var(--transition);
+      }
+
+      .video-preview-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .video-preview-thumb {
+        height: 130px;
+        background: linear-gradient(135deg, #1a2f3f, #0d1f2b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 2.2rem;
+        position: relative;
+      }
+
+      .play-icon {
+        width: 44px;
+        height: 44px;
+        background: rgba(48, 199, 211, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--navy);
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .video-preview-card:hover .play-icon {
+        background: var(--teal);
+        transform: scale(1.1);
+      }
+
+      .video-preview-body {
+        padding: 16px;
+      }
+
+      .video-preview-body h4 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+      }
+
+      .video-preview-body p {
+        font-size: 0.8rem;
+        color: var(--gray-600);
+      }
+
+      /* ---------- Research Section ---------- */
+      .research-section {
+        padding: 80px 0;
+      }
+
+      .research-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 28px;
+      }
+
+      .research-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        padding: 28px;
+        border: 1px solid var(--gray-100);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .research-card:hover {
+        border-color: var(--teal);
+        box-shadow: var(--shadow-md);
+      }
+
+      .research-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .research-card .status {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        background: rgba(48, 199, 211, 0.12);
+        color: var(--teal-dark);
+        margin-bottom: 12px;
+      }
+
+      .research-card p {
+        font-size: 0.9rem;
+        color: var(--gray-600);
+      }
+
+      /* ---------- CTA Contact ---------- */
+      .cta-contact {
+        padding: 80px 0;
+        background: var(--navy);
+        color: var(--white);
+        text-align: center;
+      }
+
+      .cta-contact h2 {
+        color: var(--white);
+        font-size: 2.2rem;
+        margin-bottom: 16px;
+      }
+
+      .cta-contact p {
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 560px;
+        margin: 0 auto 32px;
+      }
+
+      .cta-contact .btn-primary {
+        padding: 14px 36px;
+        font-size: 1rem;
+      }
+
+      /* ---------- Footer ---------- */
+      .footer {
+        background: var(--navy-light);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 48px 0 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-brand .logo {
+        margin-bottom: 16px;
+      }
+
+      .footer-brand p {
+        font-size: 0.9rem;
+        max-width: 300px;
+      }
+
+      .footer h4 {
+        color: var(--white);
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      .footer ul {
+        list-style: none;
+      }
+
+      .footer ul li {
+        margin-bottom: 8px;
+      }
+
+      .footer ul a {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      .footer ul a:hover {
+        color: var(--teal);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 0.8rem;
+      }
+
+      .footer-bottom .social-links {
+        display: flex;
+        gap: 16px;
+      }
+
+      .footer-bottom .social-links a {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 1.1rem;
+      }
+
+      .footer-bottom .social-links a:hover {
+        color: var(--teal);
+      }
+
+      /* ---------- Responsive ---------- */
+      @media (max-width: 992px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .intro-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .nav-cta .btn {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero {
+          padding: 60px 0 80px;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .focus-areas {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 1.7rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .hero-actions .btn {
+          width: 100%;
+        }
+
+        .container {
+          padding: 0 16px;
+        }
+      }
+
+      /* ---------- Animations ---------- */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ---------- Utility ---------- */
+      .mt-2 {
+        margin-top: 8px;
+      }
+      .mt-4 {
+        margin-top: 16px;
+      }
+      .mb-2 {
+        margin-bottom: 8px;
+      }
+      .mb-4 {
+        margin-bottom: 16px;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <a href="index.html" class="logo">
+            <div class="logo-icon"></div>
+            Practical <span>MDPhy</span> Tech
+          </a>
+          <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="research.html">Research & Innovation</a></li>
+            <li><a href="resources.html">Learning Resources</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-cta">
+            <a href="projects.html" class="btn btn-primary btn-sm"
+              >Explore Projects</a
+            >
+          </div>
+          <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+      </div>
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="research.html">Research & Innovation</a>
+        <a href="resources.html">Learning Resources</a>
+        <a href="contact.html">Contact</a>
+        <a href="projects.html" class="btn btn-primary" style="margin-top: 8px"
+          >Explore Projects</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <h1>
+                Engineering Better Decisions in
+                <span class="highlight">Medical Physics.</span>
+              </h1>
+              <p>
+                Practical MDPhy Tech develops practical digital tools,
+                educational resources, and intelligent technology solutions for
+                medical physics, radiation quality assurance, dosimetry, and
+                scientific research.
+              </p>
+              <div class="hero-actions">
+                <a href="projects.html" class="btn btn-primary"
+                  >Explore Our Projects <i class="fas fa-arrow-right"></i
+                ></a>
+                <a href="services.html" class="btn btn-outline"
+                  >Discover Our Services</a
+                >
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="hero-illustration">
+                <!-- Medical physics inspired SVG illustration -->
+                <svg
+                  viewBox="0 0 400 320"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="40"
+                    y="40"
+                    width="320"
+                    height="240"
+                    rx="16"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                    opacity="0.3"
+                  />
+                  <!-- Gantry / Linac abstract -->
+                  <circle
+                    cx="200"
+                    cy="140"
+                    r="60"
+                    stroke="#30c7d3"
+                    stroke-width="2"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="200"
+                    cy="140"
+                    r="40"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                    opacity="0.4"
+                  />
+                  <circle
+                    cx="200"
+                    cy="140"
+                    r="8"
+                    fill="#30c7d3"
+                    opacity="0.8"
+                  />
+                  <!-- Beam lines -->
+                  <line
+                    x1="200"
+                    y1="80"
+                    x2="200"
+                    y2="30"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                    opacity="0.4"
+                  />
+                  <line
+                    x1="260"
+                    y1="140"
+                    x2="330"
+                    y2="140"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                    opacity="0.4"
+                  />
+                  <line
+                    x1="140"
+                    y1="140"
+                    x2="70"
+                    y2="140"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                    opacity="0.4"
+                  />
+                  <!-- Data / AI nodes -->
+                  <circle
+                    cx="120"
+                    cy="220"
+                    r="6"
+                    fill="#30c7d3"
+                    opacity="0.6"
+                  />
+                  <circle
+                    cx="160"
+                    cy="240"
+                    r="4"
+                    fill="#30c7d3"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="240"
+                    cy="240"
+                    r="5"
+                    fill="#30c7d3"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="280"
+                    cy="220"
+                    r="7"
+                    fill="#30c7d3"
+                    opacity="0.6"
+                  />
+                  <line
+                    x1="120"
+                    y1="220"
+                    x2="160"
+                    y2="240"
+                    stroke="#30c7d3"
+                    stroke-width="1"
+                    opacity="0.3"
+                  />
+                  <line
+                    x1="160"
+                    y1="240"
+                    x2="240"
+                    y2="240"
+                    stroke="#30c7d3"
+                    stroke-width="1"
+                    opacity="0.3"
+                  />
+                  <line
+                    x1="240"
+                    y1="240"
+                    x2="280"
+                    y2="220"
+                    stroke="#30c7d3"
+                    stroke-width="1"
+                    opacity="0.3"
+                  />
+                  <!-- Small crosshair / target -->
+                  <circle cx="200" cy="140" r="2" fill="#30c7d3" />
+                  <line
+                    x1="200"
+                    y1="125"
+                    x2="200"
+                    y2="130"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                  />
+                  <line
+                    x1="200"
+                    y1="150"
+                    x2="200"
+                    y2="155"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                  />
+                  <line
+                    x1="185"
+                    y1="140"
+                    x2="190"
+                    y2="140"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                  />
+                  <line
+                    x1="210"
+                    y1="140"
+                    x2="215"
+                    y2="140"
+                    stroke="#30c7d3"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== INTRO / FOCUS AREAS ===== -->
+      <section class="intro fade-up">
+        <div class="container">
+          <div class="intro-grid">
+            <div>
+              <h2>Bridging medical physics and digital innovation.</h2>
+              <p>
+                Practical MDPhy Tech is a technology initiative focused on
+                creating practical, research-informed tools for the medical
+                physics community. We combine expertise in radiation physics,
+                software development, and data science to build solutions that
+                support quality assurance, dosimetry, and clinical
+                decision-making.
+              </p>
+              <p>
+                Our work spans educational platforms, QA analytics, AI
+                prototypes, and scientific software — always with a focus on
+                clarity, reproducibility, and real-world utility.
+              </p>
+              <a
+                href="about.html"
+                class="btn btn-outline-dark"
+                style="margin-top: 16px"
+                >Learn more about us <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+            <div class="focus-areas">
+              <div class="focus-item">
+                <i class="fas fa-radiation"></i> Medical Physics
+              </div>
+              <div class="focus-item">
+                <i class="fas fa-check-circle"></i> Quality Assurance
+              </div>
+              <div class="focus-item">
+                <i class="fas fa-chart-line"></i> Dosimetry
+              </div>
+              <div class="focus-item">
+                <i class="fas fa-brain"></i> AI & Machine Learning
+              </div>
+              <div class="focus-item">
+                <i class="fas fa-code"></i> Scientific Software
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FEATURED PROJECTS ===== -->
+      <section class="featured-projects fade-up">
+        <div class="container">
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">
+            Explore our current initiatives — from educational platforms to QA
+            analytics and AI research prototypes.
+          </p>
+          <div class="project-grid">
+            <!-- Project A -->
+            <article class="project-card">
+              <div class="project-thumb">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div class="project-body">
+                <h3>Practical MDPhy Learning Platform</h3>
+                <p>
+                  A digital learning platform for medical physics concepts,
+                  technical resources, and educational tools.
+                </p>
+                <div class="project-tags">
+                  <span class="tag tag-teal">Education</span>
+                  <span class="tag">Web</span>
+                </div>
+                <a href="project-details.html" class="project-link"
+                  >View Details <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </article>
+            <!-- Project B -->
+            <article class="project-card">
+              <div class="project-thumb"><i class="fas fa-chart-bar"></i></div>
+              <div class="project-body">
+                <h3>Radiotherapy Quality Assurance System</h3>
+                <p>
+                  A software project exploring data-driven QA workflows for
+                  external beam radiotherapy, including QA data analysis and
+                  machine learning applications.
+                </p>
+                <div class="project-tags">
+                  <span class="tag tag-teal">QA</span>
+                  <span class="tag">Python</span>
+                </div>
+                <a href="project-details.html" class="project-link"
+                  >View Details <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </article>
+            <!-- Project C -->
+            <article class="project-card">
+              <div class="project-thumb"><i class="fas fa-robot"></i></div>
+              <div class="project-body">
+                <h3>AI-Driven Medical Physics Research</h3>
+                <p>
+                  Research prototypes exploring machine learning for medical
+                  physics data analysis, predictive modelling, and scientific
+                  decision support.
+                </p>
+                <div class="project-tags">
+                  <span class="tag tag-teal">AI/ML</span>
+                  <span class="tag">Research</span>
+                </div>
+                <a href="project-details.html" class="project-link"
+                  >View Details <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </article>
+            <!-- Project D -->
+            <article class="project-card">
+              <div class="project-thumb"><i class="fas fa-calculator"></i></div>
+              <div class="project-body">
+                <h3>Dosimetry and Treatment Planning</h3>
+                <p>
+                  Educational and research-oriented work involving radiation
+                  dose concepts, treatment planning, dosimetric evaluation, and
+                  computational analysis.
+                </p>
+                <div class="project-tags">
+                  <span class="tag tag-teal">Dosimetry</span>
+                  <span class="tag">Planning</span>
+                </div>
+                <a href="project-details.html" class="project-link"
+                  >View Details <i class="fas fa-arrow-right"></i
+                ></a>
+              </div>
+            </article>
+          </div>
+          <div class="text-center" style="margin-top: 40px">
+            <a href="projects.html" class="btn btn-outline-dark"
+              >View All Projects <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== LEARNING RESOURCES PREVIEW ===== -->
+      <section class="learning-preview fade-up">
+        <div class="container">
+          <h2 class="section-title">Learning Resources</h2>
+          <p class="section-subtitle">
+            Educational videos on linear accelerator QA, dosimetry, treatment
+            planning, and more. Search, filter, and learn at your own pace.
+          </p>
+          <div class="video-preview-grid">
+            <div class="video-preview-card">
+              <div class="video-preview-thumb">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-preview-body">
+                <h4>Gantry Angle QA</h4>
+                <p>Medical Physics · QA</p>
+              </div>
+            </div>
+            <div class="video-preview-card">
+              <div class="video-preview-thumb">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-preview-body">
+                <h4>Dosimetry Fundamentals</h4>
+                <p>Dosimetry · Radiation Physics</p>
+              </div>
+            </div>
+            <div class="video-preview-card">
+              <div class="video-preview-thumb">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-preview-body">
+                <h4>Treatment Planning Systems</h4>
+                <p>Treatment Planning</p>
+              </div>
+            </div>
+            <div class="video-preview-card">
+              <div class="video-preview-thumb">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-preview-body">
+                <h4>ML in Medical Physics</h4>
+                <p>AI & Machine Learning</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center" style="margin-top: 40px">
+            <a href="resources.html" class="btn btn-outline-dark"
+              >Browse All Resources <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== RESEARCH & INNOVATION ===== -->
+      <section class="research-section fade-up">
+        <div class="container">
+          <h2 class="section-title">Research & Innovation</h2>
+          <p class="section-subtitle">
+            Ongoing explorations at the intersection of medical physics, data
+            science, and AI. All items are research prototypes and not validated
+            for clinical decision-making.
+          </p>
+          <div class="research-grid">
+            <div class="research-card">
+              <span class="status">Prototype</span>
+              <h3>AI for QA Data Analytics</h3>
+              <p>
+                Exploring machine learning to detect anomalies and trends in
+                radiotherapy QA measurements, with the goal of supporting
+                proactive maintenance and quality improvement.
+              </p>
+            </div>
+            <div class="research-card">
+              <span class="status">Ongoing</span>
+              <h3>Dosimetric Data Modelling</h3>
+              <p>
+                Computational analysis of dose distributions and plan quality
+                metrics using Python and statistical modelling to identify
+                patterns and support clinical decisions.
+              </p>
+            </div>
+            <div class="research-card">
+              <span class="status">Concept</span>
+              <h3>Automated Linac QA Workflows</h3>
+              <p>
+                Investigating software automation for routine linear accelerator
+                QA, from data collection to reporting, with a focus on
+                reproducibility and efficiency.
+              </p>
+            </div>
+          </div>
+          <div class="text-center" style="margin-top: 40px">
+            <a href="research.html" class="btn btn-outline-dark"
+              >Explore Research <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CTA CONTACT ===== -->
+      <section class="cta-contact fade-up">
+        <div class="container">
+          <h2>Have a project or research idea?</h2>
+          <p>
+            We're always interested in collaborating on medical physics
+            software, QA analytics, and educational initiatives. Let's build
+            something practical together.
+          </p>
+          <a href="contact.html" class="btn btn-primary"
+            >Get in Touch <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <div class="logo-icon"></div>
+              Practical <span>MDPhy</span> Tech
+            </a>
+            <p>
+              Practical digital tools, educational resources, and intelligent
+              technology solutions for medical physics, radiation QA, dosimetry,
+              and scientific research.
+            </p>
+          </div>
+          <div>
+            <h4>Navigate</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="services.html">Services</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="research.html">Research & Innovation</a></li>
+              <li><a href="resources.html">Learning Resources</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Connect</h4>
+            <ul>
+              <li>
+                <a href="mailto:hello@practicalmdphy.tech"
+                  >hello@practicalmdphy.tech</a
+                >
+              </li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">GitHub</a></li>
+              <li>Tanzania</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Practical MDPhy Tech. All rights reserved.</p>
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("open");
+          const icon = mobileMenuBtn.querySelector("i");
+          if (mobileMenu.classList.contains("open")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-times");
+          } else {
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          }
+        });
+      }
+
+      // Close mobile menu on link click
+      document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("open");
+          const icon = mobileMenuBtn.querySelector("i");
+          if (icon) {
+            icon.classList.remove("fa-times");
+            icon.classList.add("fa-bars");
+          }
+        });
+      });
+
+      // Scroll animations (fade-up)
+      const fadeElements = document.querySelectorAll(".fade-up");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      fadeElements.forEach((el) => observer.observe(el));
+
+      // Smooth scroll for anchor links (if any)
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+
+      // Active nav link highlight (based on current page)
+      const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
+      document
+        .querySelectorAll(".nav-links a, .mobile-menu a")
+        .forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href === currentPage) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+      // Log for placeholder demonstration
+      console.log(
+        "Practical MDPhy Tech — Frontend ready. Replace placeholder links, video IDs, and form handling as needed.",
+      );
+    </script>
+  </body>
+</html>

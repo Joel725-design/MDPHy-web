@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Watch MDPhy Tech learning videos on medical physics and technical tools."
+    />
+    <title>Learning Resources — Practical MDPhy Tech</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./MDPhy Tech Healthcare Logo.png"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --navy: #0a1f2e;
+        --teal: #30c7d3;
+        --off-white: #f5f9fc;
+        --gray-600: #5a6b7b;
+        --gray-800: #1e2e3b;
+        --radius: 16px;
+        font-family:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--gray-800);
+        background: var(--off-white);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site-header {
+        padding: 18px 24px;
+        background: #fff;
+        border-bottom: 1px solid #e4ebf0;
+      }
+
+      .header-content,
+      main {
+        width: min(100% - 48px, 1100px);
+        margin: 0 auto;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--navy);
+        font-weight: 700;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .brand span {
+        color: #168d98;
+      }
+
+      .back-link {
+        color: #168d98;
+        font-weight: 600;
+      }
+
+      main {
+        padding: 64px 0 80px;
+      }
+
+      h1,
+      h2 {
+        color: var(--navy);
+        line-height: 1.25;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: -0.03em;
+      }
+
+      .intro {
+        max-width: 680px;
+        margin: 0 0 36px;
+        color: var(--gray-600);
+      }
+
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+        gap: 24px;
+      }
+
+      .resource-card {
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #e4ebf0;
+        border-radius: var(--radius);
+        box-shadow: 0 8px 24px rgba(10, 31, 46, 0.06);
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #071923;
+      }
+
+      .resource-copy {
+        padding: 20px 22px 22px;
+      }
+
+      h2 {
+        margin: 0 0 6px;
+        font-size: 1.15rem;
+      }
+
+      .resource-copy p {
+        margin: 0;
+        color: var(--gray-600);
+        font-size: 0.95rem;
+      }
+
+      .site-footer {
+        padding: 22px 24px;
+        color: var(--gray-600);
+        text-align: center;
+        background: #fff;
+        border-top: 1px solid #e4ebf0;
+      }
+
+      @media (max-width: 520px) {
+        .site-header {
+          padding: 14px 16px;
+        }
+
+        .header-content,
+        main {
+          width: min(100% - 32px, 1100px);
+        }
+
+        .header-content {
+          flex-wrap: wrap;
+        }
+
+        .brand {
+          font-size: 0.88rem;
+        }
+
+        .brand img {
+          width: 34px;
+          height: 34px;
+        }
+
+        .back-link {
+          font-size: 0.88rem;
+        }
+
+        main {
+          padding: 42px 0 56px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <a class="brand" href="./index.html" aria-label="Practical MDPhy Tech home">
+          <img src="./MDPhy Tech Healthcare Logo.png" alt="" />
+          <span>Practical MDPhy Tech</span>
+        </a>
+        <a class="back-link" href="./index.html#resources">Back to website</a>
+      </div>
+    </header>
+
+    <main>
+      <h1>Learning Resources</h1>
+      <p class="intro">
+        Watch the available MDPhy Tech videos below. Use each player's controls
+        to pause, replay, or adjust playback.
+      </p>
+
+      <section class="resource-grid" aria-label="Learning resource videos">
+        <article class="resource-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            aria-label="Magnetic digital angle gauge demonstration"
+          >
+            <source
+              src="🔥 4-Side Magnetic Digital Angle Gauge 📐 Laser Protractor &amp; Inclinometer ｜ Smart Measuring Tool!.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support HTML video.
+          </video>
+          <div class="resource-copy">
+            <h2>Magnetic Digital Angle Gauge</h2>
+            <p>Laser protractor and inclinometer demonstration.</p>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            aria-label="In vivo dosimetry using an electronic portal imaging device"
+          >
+            <source
+              src="SPVM 2022： A method for in vivo dosimetry using an electronic portal imaging device - Dainna Pamisa.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support HTML video.
+          </video>
+          <div class="resource-copy">
+            <h2>In Vivo Dosimetry Using an EPID</h2>
+            <p>SPVM 2022 method presented by Dainna Pamisa.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">© 2025 Practical MDPhy Tech</footer>
+    <script src="./video-end-screen.js"></script>
+  </body>
+</html>

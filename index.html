@@ -10,11 +10,7 @@
       name="description"
       content="Practical MDPhy Tech develops digital tools, educational resources, and intelligent technology for medical physics, radiation QA, dosimetry, and AI research."
     />
-    <link
-      rel="icon"
-      type="image/png"
-      href="MDPhy Tech Healthcare Logo.png"
-    />
+    <link rel="icon" type="image/png" href="MDPhy Tech Healthcare Logo.png" />
     <!-- Font Awesome (free icons) -->
     <link
       rel="stylesheet"
@@ -535,69 +531,6 @@
         background: var(--off-white);
       }
 
-      .video-preview-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 24px;
-      }
-
-      .video-preview-card {
-        background: var(--white);
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        box-shadow: var(--shadow-sm);
-        border: 1px solid var(--gray-100);
-        transition: var(--transition);
-      }
-
-      .video-preview-card:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
-      }
-
-      .video-preview-thumb {
-        height: 130px;
-        background: linear-gradient(135deg, #1a2f3f, #0d1f2b);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255, 255, 255, 0.4);
-        font-size: 2.2rem;
-        position: relative;
-      }
-
-      .play-icon {
-        width: 44px;
-        height: 44px;
-        background: rgba(48, 199, 211, 0.9);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--navy);
-        font-size: 1rem;
-        transition: var(--transition);
-      }
-
-      .video-preview-card:hover .play-icon {
-        background: var(--teal);
-        transform: scale(1.1);
-      }
-
-      .video-preview-body {
-        padding: 16px;
-      }
-
-      .video-preview-body h4 {
-        font-size: 0.95rem;
-        margin-bottom: 4px;
-      }
-
-      .video-preview-body p {
-        font-size: 0.8rem;
-        color: var(--gray-600);
-      }
-
       /* ---------- Research Section ---------- */
       .research-section {
         padding: 80px 0;
@@ -856,77 +789,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      /* ---------- Video completion branding ---------- */
-      .mdphy-video-branding {
-        position: fixed;
-        z-index: 2147483647;
-        display: none;
-        place-items: center;
-        overflow: hidden;
-        background: rgba(5, 18, 28, 0.78);
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-        pointer-events: none;
-      }
-
-      .mdphy-video-branding.is-visible {
-        display: grid;
-        animation: mdphy-video-branding 3s ease both;
-      }
-
-      .mdphy-video-branding.is-visible img {
-        animation: mdphy-video-logo 3s ease both;
-      }
-
-      .mdphy-video-branding img {
-        width: min(58%, 340px);
-        max-height: 82%;
-        padding: 8px;
-        object-fit: contain;
-        background: var(--white);
-        border-radius: 18px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-      }
-
-      @keyframes mdphy-video-branding {
-        0% {
-          opacity: 0;
-        }
-        12%,
-        84% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes mdphy-video-logo {
-        0% {
-          opacity: 0;
-          transform: scale(0.86);
-        }
-        12%,
-        84% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(1.03);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .mdphy-video-branding.is-visible {
-          animation: none;
-        }
-
-        .mdphy-video-branding.is-visible img {
-          animation: none;
-        }
       }
     </style>
   </head>
@@ -1362,50 +1224,16 @@
         <div class="container">
           <h2 class="section-title">Learning Resources</h2>
           <p class="section-subtitle">
-            Educational videos on linear accelerator QA, dosimetry, treatment
-            planning, and more. Search, filter, and learn at your own pace.
+            Watch practical MDPhy Tech demonstrations and medical physics
+            learning videos.
           </p>
-          <div class="video-preview-grid">
-            <div class="video-preview-card">
-              <div class="video-preview-thumb">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-              </div>
-              <div class="video-preview-body">
-                <h4>Gantry Angle QA</h4>
-                <p>Medical Physics · QA</p>
-              </div>
-            </div>
-            <div class="video-preview-card">
-              <div class="video-preview-thumb">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-              </div>
-              <div class="video-preview-body">
-                <h4>Dosimetry Fundamentals</h4>
-                <p>Dosimetry · Radiation Physics</p>
-              </div>
-            </div>
-            <div class="video-preview-card">
-              <div class="video-preview-thumb">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-              </div>
-              <div class="video-preview-body">
-                <h4>Treatment Planning Systems</h4>
-                <p>Treatment Planning</p>
-              </div>
-            </div>
-            <div class="video-preview-card">
-              <div class="video-preview-thumb">
-                <div class="play-icon"><i class="fas fa-play"></i></div>
-              </div>
-              <div class="video-preview-body">
-                <h4>ML in Medical Physics</h4>
-                <p>AI & Machine Learning</p>
-              </div>
-            </div>
-          </div>
+          <p>
+            Browse the available medical physics and technical learning videos
+            in the MDPhy Tech resource library.
+          </p>
           <div class="text-center" style="margin-top: 40px">
-            <a href="#resources" class="btn btn-outline-dark"
-              >Browse All Resources <i class="fas fa-arrow-right"></i
+            <a href="./resources.html" class="btn btn-outline-dark"
+              >Browse Resources <i class="fas fa-arrow-right"></i
             ></a>
           </div>
         </div>
@@ -1513,8 +1341,8 @@
             <h4>Connect</h4>
             <ul>
               <li>
-                <a href="mailto:hello@practicalmdphy.tech"
-                  >hello@practicalmdphy.tech</a
+                <a href="mailto:joelleshidema@gmail.com"
+                  >joelleshidema@gmail.com</a
                 >
               </li>
               <li><a href="#">LinkedIn</a></li>
@@ -1600,76 +1428,8 @@
       window.addEventListener("hashchange", updateActiveNavLink);
       updateActiveNavLink();
 
-      // A capture listener also receives the non-bubbling media "ended" event.
-      const videoBranding = document.createElement("div");
-      videoBranding.className = "mdphy-video-branding";
-      videoBranding.setAttribute("role", "status");
-      videoBranding.setAttribute("aria-live", "polite");
-      videoBranding.innerHTML =
-        '<img src="MDPhy Tech Healthcare Logo.png" alt="MDPhy Tech logo">';
-      document.body.append(videoBranding);
-
-      let activeVideo = null;
-      let brandingTimeout = null;
-
-      const hideVideoBranding = () => {
-        window.clearTimeout(brandingTimeout);
-        brandingTimeout = null;
-        activeVideo = null;
-        videoBranding.classList.remove("is-visible");
-      };
-
-      const positionVideoBranding = () => {
-        if (!activeVideo || !videoBranding.classList.contains("is-visible")) {
-          return;
-        }
-
-        const bounds = activeVideo.getBoundingClientRect();
-        if (bounds.width <= 0 || bounds.height <= 0) {
-          hideVideoBranding();
-          return;
-        }
-
-        videoBranding.style.left = `${bounds.left}px`;
-        videoBranding.style.top = `${bounds.top}px`;
-        videoBranding.style.width = `${bounds.width}px`;
-        videoBranding.style.height = `${bounds.height}px`;
-      };
-
-      document.addEventListener(
-        "ended",
-        (event) => {
-          if (!(event.target instanceof HTMLVideoElement)) {
-            return;
-          }
-
-          window.clearTimeout(brandingTimeout);
-          activeVideo = event.target;
-          positionVideoBranding();
-          videoBranding.classList.remove("is-visible");
-          void videoBranding.offsetWidth;
-          videoBranding.classList.add("is-visible");
-          brandingTimeout = window.setTimeout(hideVideoBranding, 3000);
-        },
-        true,
-      );
-
-      document.addEventListener(
-        "play",
-        (event) => {
-          if (event.target instanceof HTMLVideoElement) {
-            hideVideoBranding();
-          }
-        },
-        true,
-      );
-      window.addEventListener("resize", positionVideoBranding);
-      window.addEventListener("scroll", positionVideoBranding, true);
-
-      // Log for placeholder demonstration
-      console.log(
-        "Practical MDPhy Tech — Frontend ready. Replace placeholder links, video IDs, and form handling as needed.",
-      );
+      console.log("Practical MDPhy Tech — Frontend ready.");
     </script>
+    <script src="./video-end-screen.js"></script>
   </body>
 </html>
